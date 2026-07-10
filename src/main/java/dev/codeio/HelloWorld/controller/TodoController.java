@@ -70,16 +70,20 @@ public class TodoController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Todo> createTodo(
-            @RequestBody Todo todo) {
+public ResponseEntity<Todo> createTodo(
+        @RequestBody Todo todo) {
 
-        Todo createdTodo =
-                todoService.createTodo(todo);
+    System.out.println("Received Title: " + todo.getTitle());
+    System.out.println("Received Description: " + todo.getDescription());
+    System.out.println("Received Completed: " + todo.getIsCompleted());
 
-        return ResponseEntity.status(
-                HttpStatus.CREATED
-        ).body(createdTodo);
-    }
+    Todo createdTodo = todoService.createTodo(todo);
+
+    System.out.println("Saved Todo: " + createdTodo);
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(createdTodo);
+}
 
     @PutMapping("/{id}")
     public ResponseEntity<Todo> updateTodo(
